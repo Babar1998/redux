@@ -9,8 +9,8 @@ const Home = () => {
   const dispatch = useDispatch();
   const cakeState = useSelector((state) => state.cake);
   const iceCreamState = useSelector((state) => state.iceCream);
-  const [quantity, setQuantity] = useState();
-  const [iceCreamQuantity, setIceCreamQuantity] = useState();
+  const [quantity, setQuantity] = useState("");
+  const [iceCreamQuantity, setIceCreamQuantity] = useState("");
 
   const buyCakeClickHandler = () => {
     if (quantity > 0) {
@@ -37,18 +37,14 @@ const Home = () => {
   };
 
   const handleQuantityChange = (event) => {
-    const newQuantity = parseInt(event.target.value);
+    const newQuantity = Number(event.target.value);
     console.log(newQuantity);
-    // if (!isNaN(newQuantity) && newQuantity >= 0) {
       setQuantity(newQuantity);
-    // }
   };
 
   const handleIceCreamQuantityChange = (event) => {
-    const newQuantity = parseInt(event.target.value);
-    if (!isNaN(newQuantity) && newQuantity >= 0) {
+    const newQuantity = Number(event.target.value);
       setIceCreamQuantity(newQuantity);
-    }
   };
 
   return (
