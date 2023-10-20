@@ -1,14 +1,14 @@
-const buyIce = (num) => {
+const buyIceCream = (num) => {
     return {
       type: "BUY_ICE",
       payload: num,
     };
   };
-  export default buyIce;
+  export default buyIceCream;
   
-  export const refundIce = (num) => {
+  export const refundIceCream = (num) => {
     return {
-      type: "REFUND_CAKE",
+      type: "REFUND_ICE",
       payload: num,
     };
   };

@@ -2,7 +2,7 @@ const initialState = {
     totalNumOfIceCreamBought: 0,
   };
   
-  const iceReducer = (state = initialState, action) => {
+  const iceCreamReducer = (state = initialState, action) => {
     if (action.type === "BUY_ICE") {
       return {
         ...state,
@@ -19,5 +19,5 @@ const initialState = {
     }
   };
   
-  export default iceReducer;
+  export default iceCreamReducer;
   

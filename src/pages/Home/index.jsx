@@ -2,11 +2,15 @@ import React, { useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import buyCake from "../../redux/cakes/cakesAction";
 import { refundCake } from "../../redux/cakes/cakesAction";
+import buyIceCream from "../../redux/icecream/iceCreamAction";
+import { refundIceCream } from "../../redux/icecream/iceCreamAction";
 
 const Home = () => {
   const dispatch = useDispatch();
-  const selectorState = useSelector((state) => state);
+  const cakeState = useSelector((state) => state.cake);
+  const iceCreamState = useSelector((state) => state.iceCream);
   const [quantity, setQuantity] = useState();
+  const [iceCreamQuantity, setIceCreamQuantity] = useState();
 
   const buyCakeClickHandler = () => {
     if (quantity > 0) {
@@ -20,101 +24,55 @@ const Home = () => {
     }
   };
 
+  const buyIceCreamClickHandler = () => {
+    if (iceCreamQuantity > 0) {
+      dispatch(buyIceCream(iceCreamQuantity));
+    }
+  };
+
+  const refundIceCreamClickHandler = () => {
+    if (iceCreamQuantity > 0) {
+      dispatch(refundIceCream(iceCreamQuantity));
+    }
+  };
+
   const handleQuantityChange = (event) => {
     const newQuantity = parseInt(event.target.value);
-    if (!isNaN(newQuantity) && newQuantity >= 0) {
+    console.log(newQuantity);
+    // if (!isNaN(newQuantity) && newQuantity >= 0) {
       setQuantity(newQuantity);
+    // }
+  };
+
+  const handleIceCreamQuantityChange = (event) => {
+    const newQuantity = parseInt(event.target.value);
+    if (!isNaN(newQuantity) && newQuantity >= 0) {
+      setIceCreamQuantity(newQuantity);
     }
   };
 
   return (
     <>
-      <h1>Home Page</h1>
+      <h1>Cake</h1>
 
       <label>Enter quantity: </label>
       <input type="number" value={quantity} onChange={handleQuantityChange} />
 
       <button onClick={buyCakeClickHandler}>Buy Cake</button>
-      <h2>Num of cakes bought: {selectorState.totalNumOfCakesBought}</h2>
+      <h2>Num of cakes bought: {cakeState.totalNumOfCakesBought}</h2>
       <button onClick={refundCakeClickHandler}>Return Cake</button>
+
+      <h1>Ice Cream</h1>
+
+      <label>Enter quantity: </label>
+      <input type="number" value={iceCreamQuantity} onChange={handleIceCreamQuantityChange} />
+
+      <button onClick={buyIceCreamClickHandler}>Buy Ice Cream</button>
+      <h2>Num of Ice Creams bought: {iceCreamState.totalNumOfIceCreamBought}</h2>
+      <button onClick={refundIceCreamClickHandler}>Return Ice Cream</button>
     </>
   );
 };
 
 export default Home;
 
-// import React, { useState } from "react";
-// import { useDispatch, useSelector } from "react-redux";
-// import buyCake from "../../redux/cakes/cakesAction";
-// import { refundCake } from "../../redux/cakes/cakesAction";
-
-// const Home = () => {
-//   const [numOfCakesToBuy, setNumOfCakesToBuy] = useState(1);
-//   const dispatch = useDispatch();
-//   const selectorState = useSelector((state) => {
-//     console.log("SELECTOR STATE: ", state);
-//     return state;
-//   });
-
-//   const buyCakeClickHandler = () => {
-//     dispatch(buyCake()); // Pass the number of cakes to buy
-//   };
-
-//   const refundCakeClickHandler = () => {
-//     dispatch(refundCake());
-//   };
-
-//   return (
-//     <>
-//       <h1>Home Page</h1>
-
-//       <label htmlFor="numOfCakesToBuy">Number of Cakes to Buy:</label>
-//       <input
-//         type="number"
-//         id="numOfCakesToBuy"
-//         name="numOfCakesToBuy"
-//         value={numOfCakesToBuy}
-//         onChange={(e) => setNumOfCakesToBuy(e.target.value)}
-//         min="1"
-//       />
-//       <button onClick={buyCakeClickHandler}>Buy Cake</button>
-//       <h2>Num of cakes bought: {selectorState.totalNumOfCakesBought}</h2>
-//       <button onClick={refundCakeClickHandler}>Return Cake</button>
-//     </>
-//   );
-// };
-
-// export default Home;
-
-// // import { useDispatch, useSelector } from "react-redux";
-// // import buyCake from "../../redux/cakes/cakesAction";
-// // import { refundCake } from "../../redux/cakes/cakesAction";
-// // import { useEffect, useState } from "react";
-
-// // const Home = () => {
-// //   const dispatch = useDispatch();
-// //   const selectorState = useSelector((state) => {
-// //     console.log("SELECTOR STATE: ", state);
-// //     return state;
-// //   });
-
-// //   const buyCakeClickHandler = () => {
-// //     dispatch(buyCake());
-// //   };
-// //   const refundCakeClickHandler = () => {
-// //     dispatch(refundCake());
-// //   };
-
-// //   return (
-// //     <>
-// //       <h1>Home Page</h1>
-
-// //       <button onClick={buyCakeClickHandler}>Buy Cake</button>
-// //       <h2>Num of cakes bought: {selectorState.totalNumOfCakesBought}</h2>
-// //       <button onClick={buyCakeClickHandler}>Buy Cake</button>
-// //       <button onClick={refundCakeClickHandler}>Return Cake</button>
-// //     </>
-// //   );
-// // };
-
-// // export default Home;
